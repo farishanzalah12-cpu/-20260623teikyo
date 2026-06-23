@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="shortcut icon" href="https://cyberjapandata.gsi.go.jp/favicon.ico" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title></title>
+
+    <script type="text/javascript">
+        var vURL      = "https://maps.gsi.go.jp";
+        var vURL_Site = "/index_pm.html?postmessage=1#17/35.641616/139.422463/&base=std&ls=std&disp=1&vs=c1g1j0h0k0l0u0t0z0r0s0m0f1";
+        var oMap      = null;        
+        function Init(){
+            oMap = document.createElement("iframe");
+            oMap.style.display = "none";
+  
+            EvtResize();
+            oMap.src = vURL + vURL_Site;
+            oMap.onload = function(){
+                var oContent   = oMap.contentWindow;
+                var ClientMode = {
+                  baseUrl     : null
+                , location    : null
+                , LayerJS     : null
+                , sakuzuList  : null
+                , queryString : null
+                };
+
+                ClientMode.sakuzuList = [{"fileName":"","visible":true,"features":[{"type":"Feature","properties":{"_color":"#ff0000","_opacity":0.5,"_weight":25},"geometry":{"type":"LineString","coordinates":[[139.425016,35.640683],[139.424651,35.640953],[139.424265,35.640918],[139.423879,35.641476],[139.423579,35.641511],[139.422978,35.641406],[139.421594,35.641999],[139.421604,35.641947]]}}]}];
+
+
+                oContent.postMessage(ClientMode, vURL);
+            };
+
+            document.body.appendChild(oMap);
+        };
+
+        function EvtResize(){
+	        var w = window.innerWidth;
+	        var h = window.innerHeight;
+            if(oMap != null){
+                oMap.style.width   = w + "px";
+                oMap.style.height  = h + "px";
+                if(oMap.style.display == "none"){
+                    oMap.style.display = "block";
+                }
+            }
+        };
+
+        window.onload   = function(){
+            document.body.style.margin   = "0px";
+            document.body.style.padding  = "0px";
+            document.body.style.overflow = "hidden";
+
+            Init();
+        }
+        window.onresize = EvtResize;
+    </script>
+</head>
+<body></body>
+</html>
